@@ -4,10 +4,11 @@ class AlbumPhotoRelationModel {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const AlbumPhotoRelationModel({
+  AlbumPhotoRelationModel({
     required this.idPhoto,
     required this.idAlbum,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) : createdAt = createdAt ?? DateTime.now(),
+       updatedAt = updatedAt ?? DateTime.now();
 }

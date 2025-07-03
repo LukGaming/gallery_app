@@ -2,6 +2,47 @@
 
 Este arquivo apresentas a alterações feitas no código e documentação do Gallery App.
 
+## 2025/07/03 criacao_estrutura-rev01 - rudsonalves
+
+### Adiciona índice de navegação e ajustes em modelos e documentação
+
+Este commit introduz o arquivo de índice da documentação técnica do projeto, permitindo navegação rápida entre os principais tópicos. Também atualiza os prompts de geração de commit, ajusta descrições na arquitetura MVC e melhora os modelos de domínio com inicialização padrão de datas.
+
+### Modificações
+
+* **docs/9.prompts.md**
+
+  * Corrige instruções de formatação dos textos de commit, alinhando a estrutura com o modelo adotado no projeto.
+  * Ajusta o estilo das seções ("Modificações", "Arquivos Novos", "Conclusão") para consistência.
+
+* **docs/ARCHITECTURE.md**
+
+  * Remove redundância na descrição da camada "Repositories & Services".
+  * Centraliza a responsabilidade de abstração de dados apenas nos serviços.
+
+* **lib/domain/models/album\_model.dart**
+
+  * Adiciona inicialização automática para `createdAt` e `updatedAt` se não forem fornecidos.
+
+* **lib/domain/models/album\_photo\_relation\_model.dart**
+
+  * Define valores padrão para `createdAt` e `updatedAt`, simplificando a criação da instância.
+
+* **lib/domain/models/photo\_model.dart**
+
+  * Introduz campos `createdAt` e `updatedAt` com inicialização opcional e padrão para a data atual.
+
+### Arquivos Novos
+
+* **docs/0.indice.md**
+
+  * Arquivo com índice da documentação, contendo links para introdução, prompts, arquitetura, convenções e README principal.
+
+### Conclusão
+
+Documentação e modelos atualizados com melhorias de consistência e usabilidade. Sistema segue funcional e pronto para próximos avanços.
+
+
 ## 2025/06/30 starting_documentations-01 - por rudsonalves
 
 ### Aprimora configurações do projeto e adiciona documentação e diagramas iniciais
