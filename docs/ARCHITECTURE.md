@@ -40,7 +40,6 @@ O projeto adotará o padrão **Model–View–Controller**, distribuído em trê
 src/
  ├── controllers/      # lida com eventos da UI e coordena Models
  ├── models/           # classes de domínio e DTOs
- ├── repositories/     # lógica de acesso a dados e cache
  ├── services/         # abstrações de banco, chamadas HTTP etc.
  └── views/            # widgets e telas
 ```
