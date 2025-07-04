@@ -9,7 +9,8 @@ class AlbumModel {
     required this.id,
     required this.title,
     required this.favorite,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) : createdAt = createdAt ?? DateTime.now(),
+       updatedAt = updatedAt ?? DateTime.now();
 }
