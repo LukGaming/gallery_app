@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PhotoAlbumCard extends StatelessWidget {
-  const PhotoAlbumCard({
-    super.key,
-  });
+class AlbumCard extends StatelessWidget {
+  const AlbumCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +55,8 @@ class PhotoAlbumCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Birthday Party",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "36 Photos",
-                        style: TextStyle(fontSize: 16),
-                      ),
+                      Text("Birthday Party", style: TextStyle(fontSize: 18)),
+                      Text("36 Photos", style: TextStyle(fontSize: 16)),
                       Text("January 2025", style: TextStyle(fontSize: 12)),
                     ],
                   ),
