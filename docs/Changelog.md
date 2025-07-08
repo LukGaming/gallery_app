@@ -1,5 +1,83 @@
 # Changelog
 
+## 2025/07/08 album_form-01 - rudsonalves
+
+### Adição de recurso de seleção de imagem e melhorias na estrutura do app
+
+Este commit implementa a funcionalidade de seleção de imagem usando o plugin `image_picker`, permitindo ao usuário adicionar novas fotos à galeria. Também foram realizadas melhorias visuais e ajustes técnicos, como ocultar o banner de debug, atualizar o NDK e ajustar o layout do formulário de álbum.
+
+### Modificações
+
+* **android/app/build.gradle.kts**
+
+  * Comentada a linha `ndkVersion = flutter.ndkVersion` e adicionada a versão fixa do NDK: `"27.0.12077973"`.
+
+* **android/app/src/main/AndroidManifest.xml**
+
+  * Adicionada permissão de uso da câmera (`android.permission.CAMERA`).
+
+* **lib/domain/models/photo\_model.dart**
+
+  * Campo `title` do `PhotoModel` tornou-se opcional (`String?`).
+
+* **lib/my\_app.dart**
+
+  * Desativado o `debugShowCheckedModeBanner`.
+
+* **lib/views/album\_form/album\_form.dart**
+
+  * Substituído `IntrinsicWidth` por `SizedBox` com largura fixa de 300.
+  * Reduzido o `padding` de 16.0 para 8.0.
+
+* **lib/views/home\_page/home\_page.dart**
+
+  * Importado `photo_model.dart` e `photo_picker.dart`.
+  * Substituída a função do `FloatingActionButton` para acionar ações distintas dependendo da aba ativa (criar álbum ou adicionar foto).
+  * Adicionada função `addNewPhoto` para capturar nova imagem com a ajuda de `PhotoPicker`.
+
+* **lib/views/albuns\_view/albums\_view\.dart → lib/views/widgets/photo\_album\_card.dart**
+
+  * Arquivo renomeado para refletir seu conteúdo de forma mais clara.
+
+* **lib/views/albuns\_view/top\_menu.dart → lib/views/widgets/top\_menu.dart**
+
+  * Arquivo renomeado para melhor organização.
+
+* **linux/flutter/generated\_plugin\_registrant.cc**
+
+  * Registro do plugin `file_selector_linux`.
+
+* **linux/flutter/generated\_plugins.cmake**
+
+  * Inclusão do plugin `file_selector_linux` na lista de plugins.
+
+* **pubspec.lock**
+
+  * Inclusos diversos pacotes relacionados ao `image_picker`, `file_selector` e dependências transitivas.
+
+* **pubspec.yaml**
+
+  * Adicionado `image_picker` como dependência.
+
+* **windows/flutter/generated\_plugin\_registrant.cc**
+
+  * Registro do plugin `file_selector_windows`.
+
+* **windows/flutter/generated\_plugins.cmake**
+
+  * Inclusão do plugin `file_selector_windows` na lista de plugins.
+
+### Arquivos Novos
+
+* **lib/views/widgets/photo\_picker.dart**
+
+  * Componente visual `PhotoPicker` que permite selecionar imagem da galeria ou capturar com a câmera. Retorna a imagem selecionada ao componente pai.
+
+### Conclusão
+
+As alterações introduzem a funcionalidade de captura e seleção de imagem ao app, além de refatorar trechos para melhorar a experiência do usuário e a organização do código. O sistema está funcional e pronto para novos testes.
+
+
 ## 2025/07/08 album_form - rudsonalves
 
 ### Criação do fluxo de criação de álbuns e ajustes estruturais na aplicação
