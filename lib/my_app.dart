@@ -19,10 +19,13 @@ class MyApp extends StatelessWidget {
               TopMenu(),
               Expanded(
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 2,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 1,
                   ),
-
+                  itemCount: 10,
                   itemBuilder: (context, index) {
                     return PhotoAlbumCard();
                   },
