@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/domain/models/album_model.dart';
+import 'package:gallery_app/domain/models/photo_model.dart';
 import 'package:gallery_app/views/album_form/album_form.dart';
 import 'package:gallery_app/views/albums/albums_page.dart';
 import 'package:gallery_app/views/home_page/top_menu.dart';
 import 'package:gallery_app/views/photos/photos_grid_view.dart';
+import 'package:gallery_app/views/widgets/photo_picker.dart';
 
 final List<AlbumModel> albums = [
   AlbumModel(
@@ -78,10 +80,26 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: newAlbum,
+        onPressed: processFloatActionButton,
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void processFloatActionButton() {
+    switch (currentIndex) {
+      case 0:
+        newAlbum();
+        break;
+      case 1:
+        addNewPhoto();
+        break;
+      default:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Ação desconhecida.")),
+        );
+        break;
+    }
   }
 
   Future<void> newAlbum() async {
@@ -106,5 +124,24 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       albums.add(newAlbum);
     });
+  }
+
+  Future<void> addNewPhoto() async {
+    final newPhoto = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Adicionar Foto'),
+        content: const PhotoPicker(),
+      ),
+    );
+
+    if (newPhoto == null) return;
+
+    final photo = PhotoModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      path: newPhoto.path,
+    );
+
+    debugPrint("Nova foto: ${photo.path}");
   }
 }

@@ -19,10 +19,10 @@ class _AlbumFormState extends State<AlbumForm> {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicWidth(
-      stepWidth: 300,
+    return SizedBox(
+      width: 300,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Form(
           key: _formKey,
           child: Column(
