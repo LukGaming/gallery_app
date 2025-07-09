@@ -1,35 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/data/lists_mock.dart';
 import 'package:gallery_app/domain/models/album_model.dart';
 import 'package:gallery_app/domain/models/photo_model.dart';
 import 'package:gallery_app/views/album_form/album_form.dart';
-import 'package:gallery_app/views/albums/albums_page.dart';
+import 'package:gallery_app/views/home_page/albums_grid/albums_grid_view.dart';
 import 'package:gallery_app/views/widgets/top_menu.dart';
-import 'package:gallery_app/views/photos/photos_grid_view.dart';
+import 'package:gallery_app/views/home_page/photos_grid/photos_grid_view.dart';
 import 'package:gallery_app/views/photo_form/photo_form.dart';
-
-final List<AlbumModel> albums = [
-  AlbumModel(
-    id: "1",
-    title: "Férias de verão",
-    numberOfPhotos: 34,
-    createdAt: DateTime(2023, 6, 1),
-    favorite: true,
-  ),
-  AlbumModel(
-    id: "2",
-    title: "Aniversário da Maria",
-    numberOfPhotos: 25,
-    createdAt: DateTime(2023, 7, 15),
-    favorite: false,
-  ),
-  AlbumModel(
-    id: "3",
-    title: "Viagem à praia",
-    numberOfPhotos: 18,
-    createdAt: DateTime(2023, 8, 20),
-    favorite: true,
-  ),
-];
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +27,18 @@ class _HomePageState extends State<HomePage> {
           color: Colors.greenAccent,
         ),
         elevation: 16,
-        currentIndex: currentIndex,
+        currentIndex: _currentIndex,
         onTap: (value) {
-          currentIndex = value;
+          _currentIndex = value;
           setState(() {});
         },
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.photo_library_rounded),
-            label: "Albuns",
+            label: 'Albuns',
           ),
           BottomNavigationBarItem(
-            label: "Fotos",
+            label: 'Fotos',
             icon: Icon(Icons.photo),
           ),
         ],
@@ -70,9 +47,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             TopMenu(),
-            currentIndex == 0
+            _currentIndex == 0
                 ? Expanded(
-                    child: AlbumList(),
+                    child: AlbumGridView(),
                   )
                 : PhotosGridView(),
           ],
@@ -80,29 +57,29 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: processFloatActionButton,
+        onPressed: _processFloatActionButton,
         child: Icon(Icons.add),
       ),
     );
   }
 
-  void processFloatActionButton() {
-    switch (currentIndex) {
+  void _processFloatActionButton() {
+    switch (_currentIndex) {
       case 0:
-        newAlbum();
+        _newAlbum();
         break;
       case 1:
-        addNewPhoto();
+        _addNewPhoto();
         break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Ação desconhecida.")),
+          SnackBar(content: Text('Ação desconhecida.')),
         );
         break;
     }
   }
 
-  Future<void> newAlbum() async {
+  Future<void> _newAlbum() async {
     final albumTitle = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -126,7 +103,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future<void> addNewPhoto() async {
+  Future<void> _addNewPhoto() async {
     final newPhoto = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -142,6 +119,6 @@ class _HomePageState extends State<HomePage> {
       path: newPhoto.path,
     );
 
-    debugPrint("Nova foto: ${photo.path}");
+    debugPrint('Nova foto: ${photo.path}');
   }
 }

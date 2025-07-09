@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gallery_app/domain/models/photo_model.dart';
+import 'package:gallery_app/views/widgets/icon_dialog_button.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PhotoForm extends StatefulWidget {
@@ -12,7 +14,15 @@ class PhotoForm extends StatefulWidget {
 
 class _PhotoFormState extends State<PhotoForm> {
   final ImagePicker _picker = ImagePicker();
+  final _titleController = TextEditingController();
   File? _selectedImage;
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +31,7 @@ class _PhotoFormState extends State<PhotoForm> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          spacing: 20,
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -37,24 +48,32 @@ class _PhotoFormState extends State<PhotoForm> {
                 size: 100,
                 color: Colors.grey[400],
               ),
-            const SizedBox(height: 20),
+            TextFormField(
+              decoration: const InputDecoration(labelText: "Título"),
+              controller: _titleController,
+              textCapitalization: TextCapitalization.words,
+              validator: (value) =>
+                  (value == null || value.isEmpty) ? 'Informe um título' : null,
+            ),
             OverflowBar(
               alignment: MainAxisAlignment.spaceAround,
               children: [
-                IconButton(
-                  icon: Icon(Icons.photo_library),
-                  tooltip: 'Galeria',
+                IconDialogButton(
+                  iconData: Icons.photo_library,
+                  text: 'Galeria',
                   onPressed: () => _pickImage(ImageSource.gallery),
                 ),
-                IconButton(
-                  icon: Icon(Icons.camera_alt),
-                  tooltip: 'Câmera',
+                IconDialogButton(
+                  iconData: Icons.camera_alt,
+                  text: 'Câmera',
                   onPressed: () => _pickImage(ImageSource.camera),
                 ),
-                IconButton(
-                  icon: Icon(Icons.close),
-                  tooltip: 'Fechar',
-                  onPressed: () => Navigator.of(context).pop(_selectedImage),
+                IconDialogButton(
+                  iconData: _selectedImage == null
+                      ? Icons.close
+                      : Icons.save_rounded,
+                  text: _selectedImage == null ? 'Fechar' : 'Salvar',
+                  onPressed: _savePhoto,
                 ),
               ],
             ),
@@ -75,5 +94,22 @@ class _PhotoFormState extends State<PhotoForm> {
     setState(() {
       _selectedImage = File(pickedFile.path);
     });
+  }
+
+  void _savePhoto() {
+    if (_selectedImage == null) {
+      Navigator.of(context).pop();
+      return;
+    }
+
+    final newPhoto = PhotoModel(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      title: _titleController.text,
+      path: _selectedImage!.path,
+    );
+
+    // Here you would typically save the photo to a database or file system.
+    // For this example, we will just return it to the previous screen.
+    Navigator.of(context).pop(newPhoto);
   }
 }

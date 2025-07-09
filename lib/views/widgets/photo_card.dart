@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/domain/models/album_model.dart';
+import 'package:gallery_app/domain/models/photo_model.dart';
 import 'package:intl/intl.dart';
 
-class AlbumCard extends StatelessWidget {
-  final AlbumModel album;
+class PhotoCard extends StatelessWidget {
+  final PhotoModel photo;
 
-  const AlbumCard({
+  const PhotoCard({
     super.key,
-    required this.album,
+    required this.photo,
   });
 
   @override
@@ -62,16 +62,12 @@ class AlbumCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    album.title,
+                    photo.title ?? 'Sem título',
                     style: TextStyle(fontSize: 18),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "${album.numberOfPhotos} Fotos",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    formatter.format(album.createdAt),
+                    formatter.format(photo.createdAt),
                     style: TextStyle(fontSize: 12),
                   ),
                 ],

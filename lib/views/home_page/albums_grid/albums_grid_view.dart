@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/data/lists_mock.dart';
 import 'package:gallery_app/views/widgets/album_card.dart';
-import 'package:gallery_app/views/home_page/home_page.dart';
 
-class AlbumList extends StatefulWidget {
-  const AlbumList({super.key});
+class AlbumGridView extends StatefulWidget {
+  const AlbumGridView({super.key});
 
   @override
-  State<AlbumList> createState() => _AlbumListState();
+  State<AlbumGridView> createState() => _AlbumGridViewState();
 }
 
-class _AlbumListState extends State<AlbumList> {
+class _AlbumGridViewState extends State<AlbumGridView> {
   @override
   Widget build(BuildContext context) {
     final isLandScape =

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/views/widgets/icon_dialog_button.dart';
 
 class AlbumForm extends StatefulWidget {
   const AlbumForm({super.key});
@@ -41,17 +42,19 @@ class _AlbumFormState extends State<AlbumForm> {
               OverflowBar(
                 alignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ElevatedButton(
+                  IconDialogButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).pop(_titleController.text);
                       }
                     },
-                    child: const Text('Salvar'),
+                    iconData: Icons.save_rounded,
+                    text: "Salvar",
                   ),
-                  ElevatedButton(
+                  IconDialogButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancelar'),
+                    iconData: Icons.close_rounded,
+                    text: "Fechar",
                   ),
                 ],
               ),
