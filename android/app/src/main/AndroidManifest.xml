@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permissão de câmera (opcional, mas recomendada) -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- A permissão de armazenamento geralmente não é necessária, pois o plugin usa SAF -->
     <application
         android:label="gallery_app"
         android:name="${applicationName}"

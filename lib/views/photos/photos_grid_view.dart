@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/views/home_page/photo_album_widget.dart';
+import 'package:gallery_app/domain/models/album_model.dart';
+import 'package:gallery_app/views/home_page/album_card.dart';
 
 class PhotosGridView extends StatelessWidget {
   const PhotosGridView({super.key});
@@ -18,7 +19,14 @@ class PhotosGridView extends StatelessWidget {
         ),
         itemCount: 10,
         itemBuilder: (context, index) {
-          return AlbumCard();
+          return AlbumCard(
+            album: AlbumModel(
+              id: '11',
+              title: 'Birthday Party',
+              numberOfPhotos: 36,
+              createdAt: DateTime(2025, 1, 1),
+            ),
+          );
         },
       ),
     );

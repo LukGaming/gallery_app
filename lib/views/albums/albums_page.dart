@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gallery_app/views/home_page/photo_album_widget.dart';
+import 'package:gallery_app/views/home_page/album_card.dart';
+import 'package:gallery_app/views/home_page/home_page.dart';
 
 class AlbumList extends StatefulWidget {
   const AlbumList({super.key});
@@ -20,9 +21,9 @@ class _AlbumListState extends State<AlbumList> {
         crossAxisSpacing: 8,
         childAspectRatio: 1,
       ),
-      itemCount: 2,
+      itemCount: albums.length,
       itemBuilder: (context, index) {
-        return AlbumCard();
+        return AlbumCard(album: albums[index]);
       },
     );
   }
