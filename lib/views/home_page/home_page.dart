@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/data/lists_mock.dart';
-import 'package:gallery_app/domain/models/album_model.dart';
-import 'package:gallery_app/domain/models/photo_model.dart';
+import 'package:gallery_app/views/album/album_view.dart';
 import 'package:gallery_app/views/album_form/album_form.dart';
 import 'package:gallery_app/views/home_page/albums_grid/albums_grid_view.dart';
 import 'package:gallery_app/views/widgets/top_menu.dart';
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _newAlbum() async {
-    final albumTitle = await showDialog(
+    final newAlbum = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Criar novo álbum'),
@@ -88,19 +87,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    if (albumTitle == null || albumTitle!.trim().isEmpty) return;
-
-    // Adding a new album to the list
-    final newAlbum = AlbumModel(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      title: albumTitle,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    );
+    if (newAlbum == null) return;
 
     setState(() {
       albums.add(newAlbum);
     });
+
+    if (!mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AlbumView(album: newAlbum),
+      ),
+    );
   }
 
   Future<void> _addNewPhoto() async {
@@ -114,11 +112,8 @@ class _HomePageState extends State<HomePage> {
 
     if (newPhoto == null) return;
 
-    final photo = PhotoModel(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      path: newPhoto.path,
-    );
-
-    debugPrint('Nova foto: ${photo.path}');
+    setState(() {
+      photos.add(newPhoto);
+    });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/domain/models/album_model.dart';
 import 'package:gallery_app/views/widgets/icon_dialog_button.dart';
 
 class AlbumForm extends StatefulWidget {
@@ -45,7 +46,13 @@ class _AlbumFormState extends State<AlbumForm> {
                   IconDialogButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).pop(_titleController.text);
+                        final newAlbum = AlbumModel(
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          title: _titleController.text,
+                          createdAt: DateTime.now(),
+                        );
+
+                        Navigator.of(context).pop(newAlbum);
                       }
                     },
                     iconData: Icons.save_rounded,

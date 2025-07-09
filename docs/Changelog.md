@@ -1,5 +1,52 @@
 # Changelog
 
+## 2025/07/09 album_form-05 - rudsonalves
+
+### Refatorar fluxo de álbuns e ajustar dados de mock
+
+Este commit atualiza o fluxo de criação e visualização de álbuns, implementa navegação para a nova tela de detalhe de álbum, aprimora o formulário de fotos para evitar overflow e ajusta os dados de mock comentando entradas antigas.
+
+### Modificações
+
+* **lib/data/lists\_mock.dart**
+
+  * Comentadas as instâncias de `PhotoModel` com IDs de '6' a '10' na lista `photos` para remover exemplos antigos.
+
+* **lib/views/album\_form/album\_form.dart**
+
+  * Importa `AlbumModel`.
+  * Altera o botão de salvar para criar uma instância de `AlbumModel` com ID e timestamps automáticos, retornando o modelo em vez de apenas o título.
+
+* **lib/views/home\_page/albums\_grid/albums\_grid\_view\.dart**
+
+  * Importa `AlbumModel` e `AlbumView`.
+  * Atualiza o builder para passar `onPressed` ao `AlbumCard`.
+  * Implementa o método `_openAlbum(AlbumModel album)` que faz `push` para `AlbumView`.
+
+* **lib/views/home\_page/home\_page.dart**
+
+  * Ajusta `_newAlbum()` para receber `AlbumModel` do diálogo, adicionar à lista `albums` e navegar para `AlbumView`.
+  * Refatora `_addNewPhoto()` para inserir o novo `PhotoModel` diretamente em `photos`.
+
+* **lib/views/photo\_form/photo\_form.dart**
+
+  * Envolve o conteúdo do formulário em `SingleChildScrollView` para prevenir overflow em telas pequenas.
+
+* **lib/views/widgets/album\_card.dart**
+
+  * Adiciona parâmetro opcional `onPressed` em `AlbumCard`.
+  * Envolve o container em `InkWell` e encaminha o toque para `onPressed`.
+  * Ajusta estilos internos de largura, cores e bordas para manter consistência visual.
+
+### Arquivos Novos
+
+* **lib/views/album/album\_view\.dart**: novo StatefulWidget que exibe os detalhes de um `AlbumModel` e oferece botão de ação para futuras funcionalidades.
+
+### Conclusão
+
+As alterações estão completas e o fluxo de criação, listagem e visualização de álbuns está integrado e funcional.
+
+
 ## 2025/07/09 album_form-04 - rudsonalves
 
 ### Adicionar mocks de dados, botões de diálogo com ícones e refatorar views de álbuns e fotos

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/data/lists_mock.dart';
+import 'package:gallery_app/domain/models/album_model.dart';
+import 'package:gallery_app/views/album/album_view.dart';
 import 'package:gallery_app/views/widgets/album_card.dart';
 
 class AlbumGridView extends StatefulWidget {
@@ -23,8 +25,19 @@ class _AlbumGridViewState extends State<AlbumGridView> {
       ),
       itemCount: albums.length,
       itemBuilder: (context, index) {
-        return AlbumCard(album: albums[index]);
+        return AlbumCard(
+          album: albums[index],
+          onPressed: _openAlbum,
+        );
       },
+    );
+  }
+
+  void _openAlbum(AlbumModel album) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AlbumView(album: album),
+      ),
     );
   }
 }

@@ -30,54 +30,57 @@ class _PhotoFormState extends State<PhotoForm> {
       width: 300,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          spacing: 20,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (_selectedImage != null)
-              Image.file(
-                _selectedImage!,
-                width: 300,
-                height: 300,
-                fit: BoxFit.cover,
-              )
-            else
-              Icon(
-                Icons.image,
-                size: 100,
-                color: Colors.grey[400],
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 20,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_selectedImage != null)
+                Image.file(
+                  _selectedImage!,
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.cover,
+                )
+              else
+                Icon(
+                  Icons.image,
+                  size: 100,
+                  color: Colors.grey[400],
+                ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: "Título"),
+                controller: _titleController,
+                textCapitalization: TextCapitalization.words,
+                validator: (value) => (value == null || value.isEmpty)
+                    ? 'Informe um título'
+                    : null,
               ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: "Título"),
-              controller: _titleController,
-              textCapitalization: TextCapitalization.words,
-              validator: (value) =>
-                  (value == null || value.isEmpty) ? 'Informe um título' : null,
-            ),
-            OverflowBar(
-              alignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconDialogButton(
-                  iconData: Icons.photo_library,
-                  text: 'Galeria',
-                  onPressed: () => _pickImage(ImageSource.gallery),
-                ),
-                IconDialogButton(
-                  iconData: Icons.camera_alt,
-                  text: 'Câmera',
-                  onPressed: () => _pickImage(ImageSource.camera),
-                ),
-                IconDialogButton(
-                  iconData: _selectedImage == null
-                      ? Icons.close
-                      : Icons.save_rounded,
-                  text: _selectedImage == null ? 'Fechar' : 'Salvar',
-                  onPressed: _savePhoto,
-                ),
-              ],
-            ),
-          ],
+              OverflowBar(
+                alignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconDialogButton(
+                    iconData: Icons.photo_library,
+                    text: 'Galeria',
+                    onPressed: () => _pickImage(ImageSource.gallery),
+                  ),
+                  IconDialogButton(
+                    iconData: Icons.camera_alt,
+                    text: 'Câmera',
+                    onPressed: () => _pickImage(ImageSource.camera),
+                  ),
+                  IconDialogButton(
+                    iconData: _selectedImage == null
+                        ? Icons.close
+                        : Icons.save_rounded,
+                    text: _selectedImage == null ? 'Fechar' : 'Salvar',
+                    onPressed: _savePhoto,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
