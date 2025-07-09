@@ -1,5 +1,45 @@
 # Changelog
 
+## 2025/07/09 album_form-03 - rudsonalves
+
+### Refatora widgets de álbum e formulário de foto, ajusta imports
+
+Este commit reorganiza e refatora os componentes de exibição de álbuns e o formulário de fotos, movendo-os para pastas adequadas, renomeando classes para maior clareza e atualizando todos os imports correspondentes.
+
+### Modificações
+
+* **lib/views/albums/album\_card.dart**
+
+  * Remoção completa do arquivo de cartão de álbum obsoleto na pasta `views/albums`.
+* **lib/views/albums/albums\_page.dart**
+
+  * Atualizado import de `views/home_page/album_card.dart` para `views/widgets/album_card.dart`.
+* **lib/views/home\_page/home\_page.dart**
+
+  * Atualizado import de `views/home_page/top_menu.dart` para `views/widgets/top_menu.dart`.
+  * Atualizado import de `views/widgets/photo_picker.dart` para `views/photo_form/photo_form.dart`.
+  * No diálogo de adicionar foto, substituído `PhotoPicker` por `PhotoForm`.
+* **lib/views/home\_page/top\_menu.dart**
+
+  * Remoção completa do componente `TopMenu` da pasta `views/home_page`.
+* **lib/views/widgets/photo\_picker.dart → lib/views/photo\_form/photo\_form.dart**
+
+  * Renomeado e movido: classe `PhotoPicker` agora `PhotoForm`, com atualização de state para `_PhotoFormState` e reposicionamento em `views/photo_form`.
+* **lib/views/photos/photos\_grid\_view\.dart**
+
+  * Atualizado import de `views/home_page/album_card.dart` para `views/widgets/album_card.dart`.
+* **lib/views/widgets/photo\_album\_card.dart → lib/views/widgets/album\_card.dart**
+
+  * Renomeado arquivo e classe para `AlbumCard`.
+  * Classe agora recebe `AlbumModel album` como parâmetro obrigatório.
+  * Adicionados imports de `AlbumModel` e de `intl` (`DateFormat`) para formatação de data.
+  * Layout ajustado de `Row` para `Column`, exibindo título, quantidade de fotos e data formatada dinamicamente.
+
+### Conclusão
+
+Alterações concluídas e sistema funcional.
+
+
 ## 2025/07/08 album_form-01 - rudsonalves
 
 ### Adição de recurso de seleção de imagem e melhorias na estrutura do app

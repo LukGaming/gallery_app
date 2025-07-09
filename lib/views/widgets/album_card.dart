@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_app/domain/models/album_model.dart';
+import 'package:intl/intl.dart';
 
-class PhotoAlbumCard extends StatelessWidget {
-  const PhotoAlbumCard({
+class AlbumCard extends StatelessWidget {
+  final AlbumModel album;
+
+  const AlbumCard({
     super.key,
+    required this.album,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formatter = DateFormat("d 'de' MMMM 'de' y", "pt_BR");
+
     return Container(
       width: 45,
       margin: EdgeInsets.all(8),
@@ -50,23 +57,22 @@ class PhotoAlbumCard extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsetsGeometry.all(8),
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Birthday Party",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Text(
-                        "36 Photos",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text("January 2025", style: TextStyle(fontSize: 12)),
-                    ],
+                  Text(
+                    album.title,
+                    style: TextStyle(fontSize: 18),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "${album.numberOfPhotos} Fotos",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    formatter.format(album.createdAt),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),

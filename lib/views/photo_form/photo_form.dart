@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class PhotoPicker extends StatefulWidget {
-  const PhotoPicker({super.key});
+class PhotoForm extends StatefulWidget {
+  const PhotoForm({super.key});
 
   @override
-  State<PhotoPicker> createState() => _PhotoPickerState();
+  State<PhotoForm> createState() => _PhotoFormState();
 }
 
-class _PhotoPickerState extends State<PhotoPicker> {
+class _PhotoFormState extends State<PhotoForm> {
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
 

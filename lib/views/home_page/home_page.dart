@@ -3,9 +3,9 @@ import 'package:gallery_app/domain/models/album_model.dart';
 import 'package:gallery_app/domain/models/photo_model.dart';
 import 'package:gallery_app/views/album_form/album_form.dart';
 import 'package:gallery_app/views/albums/albums_page.dart';
-import 'package:gallery_app/views/home_page/top_menu.dart';
+import 'package:gallery_app/views/widgets/top_menu.dart';
 import 'package:gallery_app/views/photos/photos_grid_view.dart';
-import 'package:gallery_app/views/widgets/photo_picker.dart';
+import 'package:gallery_app/views/photo_form/photo_form.dart';
 
 final List<AlbumModel> albums = [
   AlbumModel(
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Adicionar Foto'),
-        content: const PhotoPicker(),
+        content: const PhotoForm(),
       ),
     );
 

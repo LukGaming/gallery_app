@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_app/domain/models/album_model.dart';
-import 'package:gallery_app/views/home_page/album_card.dart';
+import 'package:gallery_app/views/widgets/album_card.dart';
 
 class PhotosGridView extends StatelessWidget {
   const PhotosGridView({super.key});
